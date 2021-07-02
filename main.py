@@ -1,14 +1,10 @@
 import tkinter as tk
+from tkinter.constants import COMMAND
 import serial
 import threading
 import time
 
-# % make command
-# % Command is a text chain formatted in the following way
-# % "pwd\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx0\n"
-# % where xxx is the percentage on each valve
-# % the end 0 marks the end of the data stream
-# % The FPGA need this formating
+
 
 class Application(tk.Tk):
     def __init__(self):
@@ -20,17 +16,25 @@ class Application(tk.Tk):
         self.threads = []
  
     def design(self):
-        testbtn = tk.Button(self, text="TEST", width=25, command=self.test)
-        startbtn = tk.Button(self, text="START", width=25, command=self.start)
-        stopbtn = tk.Button(self, text="STOP", width=25, command=self.stop)
-        quitbtn = tk.Button(self, text="QUIT", width=25, command=self.quit)
-        testbtn.pack()
-        startbtn.pack()
-        stopbtn.pack()
-        quitbtn.pack()
+        self.setbtn = tk.Button(self, text="COM SET", width=25, command=self.comset)
+        self.startbtn = tk.Button(self, text="START", width=25, command=self.start)
+        self.stopbtn = tk.Button(self, text="STOP", width=25, command=self.stop)
+        self.quitbtn = tk.Button(self, text="QUIT", width=25, command=self.quit)
+        self.console = tk.Label(self, text="")
+        self.comtxt = tk.Text(self, height=1, width=10)
 
-    def test(self):
-        print("blender test")
+        self.comtxt.pack()
+        self.setbtn.pack()
+        self.startbtn.pack()
+        self.stopbtn.pack()
+        self.quitbtn.pack()
+        self.console.pack()
+
+    def comset(self):
+        print("COM Port set to (%s)" % self.comtxt.get(1.0,"end-1c"))
+        self.setbtn.config(bg="lawn green")
+        self.console.config(text="COM PORT set")
+        
    
     def start(self):
         print("blender start")
