@@ -21,7 +21,6 @@ class Application(tk.Tk):
         self.quitbtn = tk.Button(self, text="QUIT", width=25, command=self.quit)
         self.console = tk.Label(self, text="")
         self.comtxt = tk.Text(self, height=1, width=10)
-
         self.comtxt.pack()
         self.setbtn.pack()
         self.startbtn.pack()
@@ -30,7 +29,7 @@ class Application(tk.Tk):
         self.console.pack()
 
     def comset(self):
-        print("COM Port set to (%s)" % self.comtxt.get(1.0,"end-1c"))
+        print("com port set to (%s)" % self.comtxt.get(1.0,"end-1c"))
         self.setbtn.config(bg="lawn green")
         self.console.config(text="com port set")
         
