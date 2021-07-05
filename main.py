@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter.constants import COMMAND
 import serial
 import threading
 import time
