@@ -5,7 +5,6 @@ import threading
 import time
 
 
-
 class Application(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -33,7 +32,7 @@ class Application(tk.Tk):
     def comset(self):
         print("COM Port set to (%s)" % self.comtxt.get(1.0,"end-1c"))
         self.setbtn.config(bg="lawn green")
-        self.console.config(text="COM PORT set")
+        self.console.config(text="com port set")
         
    
     def start(self):
@@ -44,20 +43,33 @@ class Application(tk.Tk):
 
     def stop(self):
         print("blender stop")
-        for thread in self.threads:
-            thread.join()
+        with serial.Serial() as ser:
+            ser.baudrate = 115200
+            ser.port = 'COM4'
+            ser.open()
+            try:
+                cmd = "pwm\n0 0 0 0 0 0 0 0 0\n"
+                ser.write(cmd.encode('ascii'))
+                self.console.config(text="blender stop")
+            except Exception as e:
+                print(e)
+        ser.close()
+
 
     def quit(self):
         print("quit")
         self.destroy()
 
     def write(self):
+        print("blender start")
         with serial.Serial() as ser:
-            ser.baudrate = 9600
+            ser.baudrate = 115200
             ser.port = 'COM4'
             ser.open()
             try:
-                ser.write(b'')
+                cmd = "pwm\n0 0 0 0 0 0 0 0 0\n"
+                ser.write(cmd.encode('ascii'))
+                self.console.config(text="blender start")
             except Exception as e:
                 print(e)
         ser.close()
