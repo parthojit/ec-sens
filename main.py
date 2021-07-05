@@ -33,15 +33,21 @@ class Application(tk.Tk):
         self.setbtn.config(bg="lawn green")
         self.console.config(text="com port set")
         
-   
     def start(self):
         print("blender start")
         self.meas_thread = threading.Thread(target=self.meas_proc,args=())
-        self.threads.append(self.meas_thread)
         self.meas_thread.start()
-
+    
     def stop(self):
         print("blender stop")
+        self.quit_thread = threading.Thread(target=self.quit_proc,args=())
+        self.quit_thread.start()
+
+    def quit(self):
+        print("quit")
+        self.destroy()
+    
+    def quit_all(self):
         with serial.Serial() as ser:
             ser.baudrate = 115200
             ser.port = 'COM4'
@@ -54,13 +60,7 @@ class Application(tk.Tk):
                 print(e)
         ser.close()
 
-
-    def quit(self):
-        print("quit")
-        self.destroy()
-
-    def write(self):
-        print("blender start")
+    def write_all(self):
         with serial.Serial() as ser:
             ser.baudrate = 115200
             ser.port = 'COM4'
@@ -78,7 +78,10 @@ class Application(tk.Tk):
         self.mainloop()
 
     def meas_proc(self):
-        print("process done")
+        self.write_all()
+    
+    def quit_proc(self):
+        self.quit_all()
 
 
 if __name__=="__main__":
