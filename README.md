@@ -1,9 +1,12 @@
+`Data Processing`
 
-# Odor blender control towards multi-dimensional sensing of electrochemical sensors
+<img src="./png/dataprocess.png">
 
-1. Write script for odor blender control in python
+## Outline
+1. pnggen - Generates png from CSV format input data
 
-2. Multiprocessing for real-time measurement over EVAL board
+2. featuregen - generates feature set with labels based on the concentrations
 
-3. Real-time analysis over long periods of time
+3. scoregen - generates scores (score1 and score2) based on rms distance between CV curves
 
+4. output - scores generated in (3) are saved in JSON format
