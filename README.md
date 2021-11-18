@@ -1,6 +1,6 @@
-`Data Processing`
+`Score Processing`
 
-<img src="./png/dataprocess.png">
+<img src="./png/score.png" width=500>
 
 ## Outline
 1. pnggen - Generates png from CSV format input data
