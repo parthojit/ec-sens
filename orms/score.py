@@ -1,4 +1,3 @@
-from matplotlib.pyplot import rc
 from lib.figproc import FigGen
 from lib.dataproc import FeatureGen
 from lib.rmsproc import RMSGen
@@ -68,7 +67,6 @@ class ScoreManager(object):
                     }
                     with open(SAVEPATH+ str(conc)+ "_" + target+ ".json","w+") as f:
                             json.dump(scores,f)
-
 
     
 if __name__ == "__main__":
