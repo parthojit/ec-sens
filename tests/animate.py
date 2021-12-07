@@ -1,5 +1,4 @@
 from matplotlib import animation
-import numpy as np
 from matplotlib import pyplot as plt
 import random
 import time
